@@ -1,0 +1,20 @@
+name: syncToGitee
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - master
+jobs:
+  repo-sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Mirror the Github repos to Gitee.
+        uses: Bamboo6/hub-mirror-action@master
+        with:
+          src: 'github/wenhpeng'
+          dst: 'gitee/wenhuipeng'
+          dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+          dst_token:  ${{ secrets.GITEE_TOKEN }}
+          static_list: "whp_test"
+          force_update: true
+          debug: true
